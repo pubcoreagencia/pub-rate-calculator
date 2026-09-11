@@ -1,0 +1,9 @@
+{
+  "name": "pub-rate-calculator",
+  "version": "1.0.0",
+  "description": "PUB Core media pricing and rate calculation engine",
+  "type": "module",
+  "scripts": {
+    "test": "node test/validate.mjs"
+  }
+}
