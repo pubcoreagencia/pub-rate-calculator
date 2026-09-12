@@ -1,4 +1,4 @@
-import { calculateRate } from '../src/calculator.js';
+import { calculateRate, calculateAgencyCommission, calculateNetMargin, calculateVolumeDiscount } from '../src/calculator.js';
 import { existsSync, readFileSync } from 'fs';
 
 console.log('[Validator] Running suite for pub-rate-calculator...');
@@ -25,6 +25,32 @@ if (typeof config.enterpriseMultiplier !== 'number') {
 const rEnterprise = calculateRate(10, 1000, config.enterpriseMultiplier);
 if (rEnterprise !== 12.5) {
   throw new Error('Enterprise calculation mismatch: expected 12.5 got ' + rEnterprise);
+}
+
+// 3. Test Agency Commission Calculation
+const grossRevenue = 1000;
+const commissionRate = 20;
+const expectedCommission = 200;
+const rAgencyCommission = calculateAgencyCommission(grossRevenue, commissionRate);
+if (rAgencyCommission !== expectedCommission) {
+  throw new Error('Agency commission mismatch: expected 200 got ' + rAgencyCommission);
+}
+
+// 4. Test Net Margin Calculation
+const costs = 800;
+const expectedMargin = 20;
+const rNetMargin = calculateNetMargin(grossRevenue, costs);
+if (rNetMargin !== expectedMargin) {
+  throw new Error('Net margin mismatch: expected 20 got ' + rNetMargin);
+}
+
+// 5. Test Volume Discount Calculation
+const volume = 500;
+const discountRate = 10;
+const expectedDiscount = 50;
+const rVolumeDiscount = calculateVolumeDiscount(volume, discountRate);
+if (rVolumeDiscount !== expectedDiscount) {
+  throw new Error('Volume discount mismatch: expected 50 got ' + rVolumeDiscount);
 }
 
 console.log('[Validator] ALL TESTS PASSED (exit 0)');

@@ -20,3 +20,18 @@ export function validateEnterpriseConfiguration(config) {
   }
   return true;
 }
+
+export function calculateAgencyCommission(grossRevenue, commissionRate) {
+  if (grossRevenue < 0 || commissionRate < 0 || commissionRate > 100) throw new Error('Invalid arguments for agency commission');
+  return (grossRevenue * (commissionRate / 100));
+}
+
+export function calculateNetMargin(grossRevenue, costs) {
+  if (grossRevenue < 0 || costs < 0) throw new Error('Invalid arguments for net margin calculation');
+  return ((grossRevenue - costs) / grossRevenue) * 100;
+}
+
+export function calculateVolumeDiscount(volume, discountRate) {
+  if (volume < 0 || discountRate < 0 || discountRate > 100) throw new Error('Invalid arguments for volume discount calculation');
+  return (volume * (discountRate / 100));
+}
