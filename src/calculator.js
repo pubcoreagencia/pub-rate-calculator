@@ -1,7 +1,9 @@
 export function calculateRate(baseCpm, impressions, multiplier = 1.0) {
   if (baseCpm < 0 || impressions < 0) throw new Error('Invalid negative arguments');
+  if (multiplier <= 0) throw new Error('Multiplier must be positive');
   return ((baseCpm * impressions) / 1000) * multiplier;
 }
+
 
 export function calculateEnterpriseRate(baseCpm, impressions, enterpriseDiscount = 0) {
   if (baseCpm < 0 || impressions < 0) throw new Error('Invalid negative arguments');
@@ -10,6 +12,7 @@ export function calculateEnterpriseRate(baseCpm, impressions, enterpriseDiscount
   const discountAmount = (grossRevenue * (enterpriseDiscount / 100));
   return grossRevenue - discountAmount;
 }
+
 
 export function validateEnterpriseConfiguration(config) {
   if (!config || typeof config !== 'object') throw new Error('Invalid configuration');
@@ -21,15 +24,18 @@ export function validateEnterpriseConfiguration(config) {
   return true;
 }
 
+
 export function calculateAgencyCommission(grossRevenue, commissionRate) {
   if (grossRevenue < 0 || commissionRate < 0 || commissionRate > 100) throw new Error('Invalid arguments for agency commission');
   return (grossRevenue * (commissionRate / 100));
 }
 
+
 export function calculateNetMargin(grossRevenue, costs) {
   if (grossRevenue < 0 || costs < 0) throw new Error('Invalid arguments for net margin calculation');
   return ((grossRevenue - costs) / grossRevenue) * 100;
 }
+
 
 export function calculateVolumeDiscount(volume, discountRate) {
   if (volume < 0 || discountRate < 0 || discountRate > 100) throw new Error('Invalid arguments for volume discount calculation');
