@@ -35,3 +35,8 @@ export function calculateVolumeDiscount(volume, discountRate) {
   if (volume < 0 || discountRate < 0 || discountRate > 100) throw new Error('Invalid arguments for volume discount calculation');
   return (volume * (discountRate / 100));
 }
+
+export function calculateAgencyRebate(revenue) {
+  if (revenue < 0) throw new Error('Invalid negative revenue');
+  return revenue * 0.12;
+}
