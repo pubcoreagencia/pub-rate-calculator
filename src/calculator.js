@@ -35,3 +35,7 @@ export function calculateVolumeDiscount(volume, discountRate) {
   if (volume < 0 || discountRate < 0 || discountRate > 100) throw new Error('Invalid arguments for volume discount calculation');
   return (volume * (discountRate / 100));
 }
+export function calculateTaxAmount(grossRevenue, taxRate) {
+  if (grossRevenue < 0 || taxRate < 0 || taxRate > 100) throw new Error('Invalid arguments for tax calculation');
+  return (grossRevenue * (taxRate / 100));
+}
