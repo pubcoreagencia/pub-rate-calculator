@@ -1,4 +1,4 @@
-import { calculateRate, calculateAgencyCommission, calculateNetMargin, calculateVolumeDiscount } from '../src/calculator.js';
+import { calculateRate, calculateAgencyCommission, calculateNetMargin, calculateVolumeDiscount, calculateTaxAmount } from '../src/calculator.js';
 import { existsSync, readFileSync } from 'fs';
 
 console.log('[Validator] Running suite for pub-rate-calculator...');
@@ -51,6 +51,13 @@ const expectedDiscount = 50;
 const rVolumeDiscount = calculateVolumeDiscount(volume, discountRate);
 if (rVolumeDiscount !== expectedDiscount) {
   throw new Error('Volume discount mismatch: expected 50 got ' + rVolumeDiscount);
+}
+
+
+// 6. Test Tax Amount Calculation
+const rTax = calculateTaxAmount(1000, 15);
+if (rTax !== 150) {
+  throw new Error('Tax calculation mismatch: expected 150 got ' + rTax);
 }
 
 console.log('[Validator] ALL TESTS PASSED (exit 0)');
